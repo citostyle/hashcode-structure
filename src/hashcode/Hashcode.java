@@ -1,5 +1,3 @@
-package hashcode;
-
 import java.io.FileNotFoundException;
 
 public class Hashcode {
