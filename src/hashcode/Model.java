@@ -26,5 +26,4 @@ public class Model {
 		return model;		
 	}
 
-	// This is a test
 }
