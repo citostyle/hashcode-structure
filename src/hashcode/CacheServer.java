@@ -1,5 +1,7 @@
 package hashcode;
 
+import java.util.List;
+
 public class CacheServer {
 	// keep it now public for ease
 	public int cacheServerId;
