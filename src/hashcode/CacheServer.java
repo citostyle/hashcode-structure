@@ -24,6 +24,11 @@ public class CacheServer {
 			return false;
 		}
 		
+		//video is already contained in the CacheServer
+		if(this.assignment.contains(video)) {
+			return false;
+		}
+		
 		this.assignment.add(video);
 		this.remainingCapacity = this.remainingCapacity - video.size;
 		
