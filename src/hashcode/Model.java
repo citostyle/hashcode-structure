@@ -19,6 +19,8 @@ public class Model {
 		this.cacheServers = new ArrayList<CacheServer>();
 		this.endpoints = new ArrayList<Endpoint>();
 	}
+	
+	
 
 
     public double getTotalScore() {
