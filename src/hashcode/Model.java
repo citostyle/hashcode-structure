@@ -32,6 +32,7 @@ public class Model {
                     for(Video cacheVideo: cache.assignment) { // videos assignes to that cache
                         if(cacheVideo.videoId == videoRequest.getKey()) {// if the cache has the video
                             latencies.add(latencyCache);
+
                             break;
                         }
                     }
