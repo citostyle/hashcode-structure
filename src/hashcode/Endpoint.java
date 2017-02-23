@@ -21,7 +21,7 @@ public class Endpoint {
 		this.cacheLatencies.put(cacheServer, latency);
 	}
 	
-	public void addVideoRequest(Video video, int numberOfReqeusts) {
-		this.requests.put(video, numberOfReqeusts);
+	public void addVideoRequest(Video video, int numberOfRequests) {
+		this.requests.put(video, numberOfRequests);
 	}
 }
