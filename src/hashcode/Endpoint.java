@@ -10,11 +10,14 @@ public class Endpoint {
 	public Map<CacheServer, Integer> cacheLatencies;
 	public Map<Video, Integer> requests;
 	
+	public Map<Video, Integer> videoScores;
+	
 	public Endpoint(int endpointId, int latencyDataCenter) {
 		this.endpointId = endpointId;
 		this.latencyDataCenter = latencyDataCenter;
 		this.cacheLatencies = new HashMap<CacheServer, Integer>();
 		this.requests = new HashMap<Video, Integer>();
+		this.videoScores = new HashMap<Video, Integer>();
 	}
 	
 	public void assignCacheServer(CacheServer cacheServer, int latency) {
@@ -25,5 +28,6 @@ public class Endpoint {
 	
 	public void addVideoRequest(Video video, int numberOfRequests) {
 		this.requests.put(video, numberOfRequests);
+		this.videoScores.put(video, (int)(numberOfRequests / video.size));
 	}
 }

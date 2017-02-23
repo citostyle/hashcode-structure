@@ -56,6 +56,26 @@ public class Model {
     public double getTotalScore() {
 
 	    Integer sum = 0;
+	    Integer totalNumRequests = 0;
+        for (Endpoint e: this.endpoints) {
+            for (Map.Entry<Video, Integer> videoRequest : e.requests.entrySet()) { // each endpoint
+                Video currentVideo = videoRequest.getKey();
+                Integer currentVideoRequests = videoRequest.getValue();
+
+                totalNumRequests += currentVideoRequests;
+                int minLatency = this.getMinimumDelay(e, currentVideo);
+                
+                Integer requestTimeSaved = currentVideoRequests * (e.latencyDataCenter - minLatency);
+                sum += requestTimeSaved;
+            }
+        }
+        double total = Math.floor((sum * 1000) / totalNumRequests);
+        return total;
+    }	
+	
+    /*public double getTotalScore() {
+
+	    Integer sum = 0;
 	    Integer TotalNumRequests = 0;
         for (Endpoint e: this.endpoints) {
             for (Map.Entry<Video, Integer> videoRequest : e.requests.entrySet()) { // each endpoint
@@ -83,7 +103,7 @@ public class Model {
         }
         double total = sum * 1000 / TotalNumRequests;
         return total;
-    }
+    }*/
 
 
 
