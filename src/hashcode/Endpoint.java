@@ -19,6 +19,8 @@ public class Endpoint {
 	
 	public void assignCacheServer(CacheServer cacheServer, int latency) {
 		this.cacheLatencies.put(cacheServer, latency);
+		// add endpoint to cacheserver
+		cacheServer.assignEndpoint(this);
 	}
 	
 	public void addVideoRequest(Video video, int numberOfRequests) {
