@@ -18,8 +18,13 @@ public class GreedyEndpointStrategy {
 		Model model = Model.createModelFromFile(filename);
 		assign(model);
 		
-		//System.out.println(model.getTotalScore());
-		model.writeOutput("test.txt");
+		System.out.println(model.getTotalScore());
+		
+		for(CacheServer s : model.cacheServers) {
+			System.out.println(s.remainingCapacity);
+		}
+		
+		model.writeOutput(filename + "_out.txt");
 		//model.printOutput();
 	}
 	

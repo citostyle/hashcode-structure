@@ -75,7 +75,7 @@ public class Model {
 	}
 	
 	public void printOutput() {
-        
+        System.out.println(this.getOutput());
     }
 
     public double getTotalScore() {
