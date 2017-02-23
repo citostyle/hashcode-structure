@@ -3,6 +3,7 @@ package hashcode;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -19,7 +20,17 @@ public class Model {
 		this.endpoints = new ArrayList<Endpoint>();
 	}
 	
-	
+	public int getMinimumDelay(Endpoint endpoint, Video video) {
+		List<Integer> allDelays = new ArrayList<Integer>();
+		allDelays.add(endpoint.latencyDataCenter);
+		
+		for(Map.Entry<CacheServer, Integer> entry : endpoint.cacheLatencies.entrySet()) {
+			if(entry.getKey().assignment.contains(video)) {
+				allDelays.add(entry.getValue());
+			}
+		}
+		return Collections.min(allDelays);
+	}
 
     public int getTotalScore() {
 
