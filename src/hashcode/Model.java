@@ -1,7 +1,13 @@
 package hashcode;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -33,23 +39,42 @@ public class Model {
 		return Collections.min(allDelays);
 	}
 
-	public void printOutput() {
+	public void writeOutput(String filename) {
+		try (Writer writer = new BufferedWriter(new OutputStreamWriter(
+	            new FileOutputStream(filename), "utf-8"))) {
+			writer.write(this.getOutput());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public String getOutput() {
 	    Integer totalCaches = 0;
+	    StringBuilder sb = new StringBuilder();
 	    for(CacheServer cache : this.cacheServers) {
             if(!cache.assignment.isEmpty()) {
                 ++totalCaches;
             }
         }
-        System.out.println(totalCaches);
+        sb.append(totalCaches);
+        sb.append("\n");
         for(CacheServer cache : this.cacheServers) {
             if(!cache.assignment.isEmpty()) {
-                System.out.printf("%d", cache.cacheServerId);
+                //System.out.printf("%d", cache.cacheServerId);
+            	sb.append(cache.cacheServerId);
                 for(Video v : cache.assignment) {
-                    System.out.printf(" %d", v.videoId);
+                	sb.append(" ");
+                	sb.append(v.videoId);
+                    //System.out.printf(" %d", v.videoId);
                 }
-                System.out.println();
+                sb.append("\n");
             }
         }
+		return sb.toString();
+	}
+	
+	public void printOutput() {
         
     }
 
@@ -69,7 +94,8 @@ public class Model {
                 sum += requestTimeSaved;
             }
         }
-        double total = Math.floor((sum * 1000) / totalNumRequests);
+        
+        double total = Math.floor(((double)sum * (double)1000) / (double)totalNumRequests);
         return total;
     }	
 	

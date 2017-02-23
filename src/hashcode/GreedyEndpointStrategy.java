@@ -18,14 +18,15 @@ public class GreedyEndpointStrategy {
 		Model model = Model.createModelFromFile(filename);
 		assign(model);
 		
-		System.out.println(model.getTotalScore());
-		model.printOutput();
+		//System.out.println(model.getTotalScore());
+		model.writeOutput("test.txt");
+		//model.printOutput();
 	}
 	
 	public static void assign(Model model) {
 		for(Endpoint endpoint : model.endpoints) {
-			Map<Video, Integer> sortedVideos = sortByValue(endpoint.requests, true);
-			//Map<Video, Integer> sortedVideos = sortByValue(endpoint.videoScores, true);
+			//Map<Video, Integer> sortedVideos = sortByValue(endpoint.requests, true);
+			Map<Video, Integer> sortedVideos = sortByValue(endpoint.videoScores, true);
 			Map<CacheServer, Integer> sortedCaches = sortByValue(endpoint.cacheLatencies);
 			for(Map.Entry<Video, Integer> videoEntry: sortedVideos.entrySet()) {
 				for(Map.Entry<CacheServer, Integer> cacheEntry : sortedCaches.entrySet()) {
