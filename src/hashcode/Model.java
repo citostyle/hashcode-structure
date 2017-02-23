@@ -12,7 +12,6 @@ public class Model {
 	
 	
 	
-	
 	//example code of how to read model parameters from files 
 	public static Model createModelFromFile(String filename) throws FileNotFoundException {
 		Scanner scanner = new Scanner(new File(filename));

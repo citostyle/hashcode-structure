@@ -6,7 +6,6 @@ public class CacheServer {
 	public int maxCapacity;
 	
 	public CacheServer(int cacheServerId, int maxCapacity) {
-		super();
 		this.cacheServerId = cacheServerId;
 		this.maxCapacity = maxCapacity;
 	}

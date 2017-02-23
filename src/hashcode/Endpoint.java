@@ -1,5 +1,6 @@
 package hashcode;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Endpoint {
@@ -12,6 +13,8 @@ public class Endpoint {
 	public Endpoint(int endpointId, int latencyDataCenter) {
 		this.endpointId = endpointId;
 		this.latencyDataCenter = latencyDataCenter;
+		this.cacheLatencies = new HashMap<CacheServer, Integer>();
+		this.requests = new HashMap<Video, Integer>();
 	}
 	
 	public void assignCacheServer(CacheServer cacheServer, int latency) {
