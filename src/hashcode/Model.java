@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -24,22 +25,24 @@ public class Model {
             for (Map.Entry<Video, Integer> videoRequest : e.requests.entrySet()) { // each endpoint
                 Video currentVideo = videoRequest.getKey();
                 Integer currentVideoRequests = videoRequest.getValue();
-                List<Integer> latencies;
+                List<Integer> latencies = new ArrayList<Integer>();
                 latencies.add(e.latencyDataCenter);
                 for(Map.Entry<CacheServer, Integer> cacheLatencies: e.cacheLatencies.entrySet()) { // each cache connected to endpoint
                     CacheServer cache = cacheLatencies.getKey();
                     Integer latencyCache = cacheLatencies.getValue();
-                    for(Video cacheVideo: cache.assignment) { // videos assignes to that cache
-                        if(cacheVideo.videoId == videoRequest.getKey()) {// if the cache has the video
+                    for(Video cacheVideo: cache.assignment) { // videos assigns to that cache
+                        if(cacheVideo.videoId == videoRequest.getKey().videoId) {// if the cache has the video
                             latencies.add(latencyCache);
                             break;
                         }
                     }
                 }
-
-                System.out.println(entry.getKey() + "/" + entry.getValue());
             }
+
+                //System.out.println(entry.getKey() + "/" + entry.getValue());
         }
+        return 0;
+    }
         // Requests x (LD-L)
 
         //Total is the (sum(time saved individual request descriptions * 1000) / total number of requests in all requests //rounding down
