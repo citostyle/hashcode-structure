@@ -8,7 +8,6 @@ public class CacheServer {
 
 
 	public CacheServer(int cacheServerId, int maxCapacity) {
-		super();
 		this.cacheServerId = cacheServerId;
 		this.maxCapacity = maxCapacity;
 	}

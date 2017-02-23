@@ -1,5 +1,6 @@
 package hashcode;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Video {
@@ -8,9 +9,9 @@ public class Video {
 	public List<CacheServer> assignment;
 	
 	public Video(int videoId, int size) {
-		super();
 		this.videoId = videoId;
 		this.size = size;
+		this.assignment = new ArrayList<CacheServer>();
 	}	
 	
 	public void addAssignment(CacheServer cacheServer) {
