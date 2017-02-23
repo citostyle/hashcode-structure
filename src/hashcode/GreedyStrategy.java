@@ -20,6 +20,7 @@ public class GreedyStrategy {
 
 		boolean videoPlaced = true;
 		while (videoPlaced){
+			System.out.println("videoPlaced");
 			videoPlaced = false;
 			for(CacheServer cacheServer: model.cacheServers) {
 				Video bestVideo = null;
@@ -28,13 +29,16 @@ public class GreedyStrategy {
 					double score = 0;
 					if (video.size <= cacheServer.remainingCapacity){
 						for(Endpoint endpoint : cacheServer.endpoints){
-							score += endpoint.requests * Math.max(0,model.getCurrentDelay(video,endpoint));
+							if(endpoint.requests.get(video)!=null){
+								score += endpoint.requests.get(video) * Math.max(0,model.getMinimumDelay(endpoint,video));
+							}
 						}
 					}
 					score/=video.size;
 					if(score>bestVideosScore){
 						bestVideosScore = score;
 						bestVideo = video;
+						videoPlaced = true;
 					}
 				}
 				cacheServer.addVideo(bestVideo);
