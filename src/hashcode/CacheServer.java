@@ -1,6 +1,5 @@
 package hashcode;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CacheServer {
@@ -15,8 +14,6 @@ public class CacheServer {
 		this.cacheServerId = cacheServerId;
 		this.maxCapacity = maxCapacity;
 		this.remainingCapacity = maxCapacity;
-		this.endpoints = new ArrayList<Endpoint>();
-		this.assignment = new ArrayList<>();
 	}
 	
 	
@@ -28,7 +25,7 @@ public class CacheServer {
 		}
 		
 		this.assignment.add(video);
-		this.remainingCapacity -= video.size;
+		this.remainingCapacity = this.remainingCapacity - video.size;
 		
 		//this is stored in both video entity and 
 		video.addAssignment(this);
