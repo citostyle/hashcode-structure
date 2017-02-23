@@ -31,26 +31,32 @@ public class GreedyStrategy {
 				Video bestVideo = null;
 				double bestVideosScore = Double.MIN_VALUE;
 				for (Video video : model.videos) {
-					//System.out.println("videos");
-					double score = 0;
-					if (video.size <= cacheServer.remainingCapacity){
-						for(Endpoint endpoint : cacheServer.endpoints){
-							if(endpoint.requests.get(video)!=null){
-								score += endpoint.requests.get(video) * Math.max(0,model.getMinimumDelay(endpoint,video));
+					if(!cacheServer.assignment.contains(video)) {
+						//System.out.println("videos");
+						double score = 0;
+						if (video.size <= cacheServer.remainingCapacity) {
+							for (Endpoint endpoint : cacheServer.endpoints) {
+								if (endpoint.requests.get(video) != null) {
+									score += endpoint.requests.get(video) * Math.max(0, model.getMinimumDelay(endpoint, video));
+								}
 							}
 						}
-					}
-					score/=video.size;
-					if(score>bestVideosScore){
-						bestVideosScore = score;
-						bestVideo = video;
-						videoPlaced = true;
+						score /= video.size;
+						if (score > bestVideosScore) {
+							bestVideosScore = score;
+							bestVideo = video;
+							videoPlaced = true;
+						}
 					}
 				}
-			//	if(bestVideo!=null) {
-					cacheServer.addVideo(bestVideo);
-			//	}
+				if(bestVideo!=null) {
+					System.out.println("Adding Video " + bestVideo.videoId + " to Server " + cacheServer.cacheServerId);
+					System.out.println("This server has " + cacheServer.remainingCapacity + " capacity left before");
+					System.out.println(cacheServer.addVideo(bestVideo));
+					System.out.println("This server has " + cacheServer.remainingCapacity + " capacity left after");
+				}
 			}
 		}
+		model.printOutput();
 	}
 }
