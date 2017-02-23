@@ -1,8 +1,17 @@
+package hashcode;
+
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Model {
+	List<Video> videos;
+	List<CacheServer> cacheServers;
+	List<Endpoint> endpoints;
+	
+	
+	
 	
 	//example code of how to read model parameters from files 
 	public static Model createModelFromFile(String filename) throws FileNotFoundException {
