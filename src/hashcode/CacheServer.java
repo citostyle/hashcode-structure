@@ -8,7 +8,7 @@ public class CacheServer {
 	public int maxCapacity;
 	public List<Video> assignment;
 	public int remainingCapacity;
-
+	public List<Endpoint> endpoints;
 
 	public CacheServer(int cacheServerId, int maxCapacity) {
 		this.cacheServerId = cacheServerId;
@@ -31,5 +31,9 @@ public class CacheServer {
 		video.addAssignment(this);
 		
 		return true;
+	}
+
+	public void assignEndpoint(Endpoint endpoint) {
+		this.endpoints.add(endpoint);
 	}
 }
