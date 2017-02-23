@@ -32,12 +32,32 @@ public class Model {
 		}
 		return Collections.min(allDelays);
 	}
-    
+
+	public void printOutput() {
+	    Integer totalCaches = 0;
+	    for(CacheServer cache : this.cacheServers) {
+            if(!cache.assignment.isEmpty()) {
+                ++totalCaches;
+            }
+        }
+        System.out.println(totalCaches);
+        for(CacheServer cache : this.cacheServers) {
+            if(!cache.assignment.isEmpty()) {
+                System.out.printf("%d", cache.cacheServerId);
+                for(Video v : cache.assignment) {
+                    System.out.printf(" %d", v.videoId);
+                }
+                System.out.println();
+            }
+        }
+        
+    }
+
     public double getTotalScore() {
 
 	    Integer sum = 0;
 	    Integer TotalNumRequests = 0;
-        for (Endpoint e: endpoints) {
+        for (Endpoint e: this.endpoints) {
             for (Map.Entry<Video, Integer> videoRequest : e.requests.entrySet()) { // each endpoint
                 Video currentVideo = videoRequest.getKey();
                 Integer currentVideoRequests = videoRequest.getValue();
