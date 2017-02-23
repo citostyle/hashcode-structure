@@ -23,7 +23,7 @@ public class GreedyStrategy {
 			videoPlaced = false;
 			for(CacheServer cacheServer: model.cacheServers) {
 				Video bestVideo = null;
-				double bestVideosScore = Double.MAX_VALUEN
+				double bestVideosScore = Double.MAX_VALUE;
 				for (Video video : model.videos) {
 					double score = 0;
 					if (video.size <= cacheServer.remainingCapacity){
