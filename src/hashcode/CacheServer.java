@@ -1,5 +1,6 @@
 package hashcode;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CacheServer {
@@ -14,6 +15,8 @@ public class CacheServer {
 		this.cacheServerId = cacheServerId;
 		this.maxCapacity = maxCapacity;
 		this.remainingCapacity = maxCapacity;
+		this.endpoints = new ArrayList<Endpoint>();
+		this.assignment = new ArrayList<>();
 	}
 	
 	
