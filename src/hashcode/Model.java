@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+import java.util.Collections;
 
 public class Model {
 	List<Video> videos;
@@ -19,34 +20,38 @@ public class Model {
 		this.endpoints = new ArrayList<Endpoint>();
 	}
 
-    public int getTotalScore() {
 
+    public double getTotalScore() {
+
+	    Integer sum = 0;
+	    Integer TotalNumRequests = 0;
         for (Endpoint e: endpoints) {
             for (Map.Entry<Video, Integer> videoRequest : e.requests.entrySet()) { // each endpoint
                 Video currentVideo = videoRequest.getKey();
                 Integer currentVideoRequests = videoRequest.getValue();
+
+                TotalNumRequests += currentVideoRequests;
                 List<Integer> latencies = new ArrayList<Integer>();
                 latencies.add(e.latencyDataCenter);
                 for(Map.Entry<CacheServer, Integer> cacheLatencies: e.cacheLatencies.entrySet()) { // each cache connected to endpoint
                     CacheServer cache = cacheLatencies.getKey();
                     Integer latencyCache = cacheLatencies.getValue();
-                    for(Video cacheVideo: cache.assignment) { // videos assigns to that cache
-                        if(cacheVideo.videoId == videoRequest.getKey().videoId) {// if the cache has the video
-                            latencies.add(latencyCache);
 
+                    for(Video cacheVideo: cache.assignment) { // videos assigns to that cache
+                        if(cacheVideo.videoId == currentVideo.videoId) {// if the cache has the video
+                            latencies.add(latencyCache);
                             break;
                         }
                     }
                 }
+                Integer minLatency = Collections.min(latencies);
+                Integer requestTimeSaved = currentVideoRequests * (e.latencyDataCenter - minLatency);
+                sum += requestTimeSaved;
             }
-
-                //System.out.println(entry.getKey() + "/" + entry.getValue());
         }
-        return 0;
+        double total = sum * 1000 / TotalNumRequests;
+        return total;
     }
-        // Requests x (LD-L)
-
-        //Total is the (sum(time saved individual request descriptions * 1000) / total number of requests in all requests //rounding down
 
 
 
